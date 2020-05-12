@@ -27,6 +27,18 @@ const imc = () => {
     }
 
 
+    /**
+     *
+     * De acordo com o site governamental, o cálculo do imc de crianças e adolescentes
+     * depende do sexo e da idade da criança, sendo necessário a consulta direta com
+     * um especialista para crianças com idades a baixo de 10 anos, pois o cálculo se
+     * torna mais complexo, precisando de um profissional experiente para a estimativa.
+     *
+     * https://www.saude.gov.br/component/content/article/804-imc/40510-imc-em-criancas-e-adolescentes%20Acesso%20em%2024-10-2019
+     *
+     *
+     * **/
+
     const imc_adolescente = (altura: number, peso: number,
                               idade: number, sexo: string)=>{
 
@@ -83,24 +95,12 @@ const imc = () => {
 
         let imc_value = peso/(altura*altura)
 
-        //const function_auxiliar = (imc:number, idade: number,
-        //max_value: number, min_value: number)=>{
-
         let value_obj = sexo == 'M'?
                         imc_table_values_masc.filter(p => {return p.idade == idade}) :
                         imc_table_values_fem.filter(p => {return p.idade == idade})
 
 
         return function_auxiliar(imc_value, value_obj[0].max, value_obj[0].min)
-
-        // if(sexo == 'M'){
-        //   let values_masc = imc_table_values_masc.filter(p => {return p.idade == idade})
-        //   return function_auxiliar(imc_value,values_masc[0].max, values_masc[0].min)
-
-        // }else{
-        //   let values_fem = imc_table_values_fem.filter(p => {return p.idade == idade})
-        //   return function_auxiliar(imc_value, values_fem[0].max, values_fem[0].min)
-        // }
       }
     }
 

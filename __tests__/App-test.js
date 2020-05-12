@@ -22,6 +22,10 @@ describe('IMC', ()=>{
     Casos de teste:
       imc_comum sendo calculado com valor negativo.
       imc_comum entre os valores pedidos.
+
+      imc_adolescente recebendo valores incorretos para o cálculo.
+      imc_adolescente recebendo os valores para cálculo pra sexo masculino e femninino,
+      além dos atributos de idade.
   */
  it('Cálculo de IMC Comum', ()=>{
       const imc_cal = ImcCalculator.imc();
@@ -38,7 +42,6 @@ describe('IMC', ()=>{
 
   it('Cálculo IMC Adolescente',()=>{
       const imc_adol = ImcCalculator.imc();
-
       expect(imc_adol.imc_adolescente(-1,2,-2,'M')).toEqual('Os valores digitados são inválidos. Altura, peso e idade devem ser maior que zero.')
       expect(imc_adol.imc_adolescente(1.68,75,5,'F')).toEqual('A avaliação do peso em crianças menores de 10 anos é mais complexa, pois utiliza indicadores diferentes para subgrupos diferentes (0 a 2 anos, 2 a 5 anos e 5 a 10 anos). Para mais informações, busque a orientação de um profissional de saúde.')
 
@@ -51,8 +54,6 @@ describe('IMC', ()=>{
       expect(imc_adol.imc_adolescente(1.7,78,15,'M')).toEqual('Sobrepeso')
       expect(imc_adol.imc_adolescente(1.78,70,19,'M')).toEqual('Adequado')
       expect(imc_adol.imc_adolescente(1.86,60,18,'M')).toEqual('Baixo Peso')
-
-
   })
 
 })

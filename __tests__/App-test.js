@@ -35,4 +35,24 @@ describe('IMC', ()=>{
       expect(imc_cal.imc_comum(1.6, 110)).toEqual('Obesidade grau 3');
   })
 
+
+  it('Cálculo IMC Adolescente',()=>{
+      const imc_adol = ImcCalculator.imc();
+
+      expect(imc_adol.imc_adolescente(-1,2,-2,'M')).toEqual('Os valores digitados são inválidos. Altura, peso e idade devem ser maior que zero.')
+      expect(imc_adol.imc_adolescente(1.68,75,5,'F')).toEqual('A avaliação do peso em crianças menores de 10 anos é mais complexa, pois utiliza indicadores diferentes para subgrupos diferentes (0 a 2 anos, 2 a 5 anos e 5 a 10 anos). Para mais informações, busque a orientação de um profissional de saúde.')
+
+      //feminino
+      expect(imc_adol.imc_adolescente(1.68,75,14,'F')).toEqual('Sobrepeso')
+      expect(imc_adol.imc_adolescente(1.68,45,11,'F')).toEqual('Adequado')
+      expect(imc_adol.imc_adolescente(1.6,42,17,'F')).toEqual('Baixo Peso')
+
+      //masculino
+      expect(imc_adol.imc_adolescente(1.7,78,15,'M')).toEqual('Sobrepeso')
+      expect(imc_adol.imc_adolescente(1.78,70,19,'M')).toEqual('Adequado')
+      expect(imc_adol.imc_adolescente(1.86,60,18,'M')).toEqual('Baixo Peso')
+
+
+  })
+
 })

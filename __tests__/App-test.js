@@ -56,4 +56,32 @@ describe('IMC', ()=>{
       expect(imc_adol.imc_adolescente(1.86,60,18,'M')).toEqual('Baixo Peso')
   })
 
+
+  it('Cálculo IMC Terceira idade', ()=>{
+    const imc_idoso = ImcCalculator.imc();
+
+    //Valores incorretos
+    expect(imc_idoso.imc_terceiraIdade(-1.6, 60)).toEqual('Valores deve ser maiores que zero')
+    expect(imc_idoso.imc_terceiraIdade(1.68, -52)).toEqual('Valores deve ser maiores que zero')
+    expect(imc_idoso.imc_terceiraIdade(-1.52, -75)).toEqual('Valores deve ser maiores que zero')
+
+    //teste para valores sem a circunferência(opcional)
+    //IMC normal || IMC à baixo do normal || IMC acima do normal
+    expect(imc_idoso.imc_terceiraIdade(1.6, 60)).toEqual(['Peso adequado', 'No caso dos idosos, além do IMC, é importante avaliar o perímetro ou circunferência da panturrilha, assim como se faz com a cintura quando medimos a circunferência da cintura. O perímetro da panturrilha é mais sensível para a avaliação da massa muscular, cuja redução implica a diminuição da força muscular. Nos idosos, o perímetro superior a 31 cm indica um quadro de normalidade, enquanto uma medida igual ou inferior a esse valor é indicativa de desnutrição.'])
+    expect(imc_idoso.imc_terceiraIdade(1.68, 52)).toEqual(['Baixo peso', 'No caso dos idosos, além do IMC, é importante avaliar o perímetro ou circunferência da panturrilha, assim como se faz com a cintura quando medimos a circunferência da cintura. O perímetro da panturrilha é mais sensível para a avaliação da massa muscular, cuja redução implica a diminuição da força muscular. Nos idosos, o perímetro superior a 31 cm indica um quadro de normalidade, enquanto uma medida igual ou inferior a esse valor é indicativa de desnutrição.'])
+    expect(imc_idoso.imc_terceiraIdade(1.52, 75)).toEqual(['Sobrepeso', 'No caso dos idosos, além do IMC, é importante avaliar o perímetro ou circunferência da panturrilha, assim como se faz com a cintura quando medimos a circunferência da cintura. O perímetro da panturrilha é mais sensível para a avaliação da massa muscular, cuja redução implica a diminuição da força muscular. Nos idosos, o perímetro superior a 31 cm indica um quadro de normalidade, enquanto uma medida igual ou inferior a esse valor é indicativa de desnutrição.'])
+
+
+
+    //teste para valores com a circunferência(opcional)
+    //IMC normal || IMC à baixo do normal || IMC acima do normal
+    expect(imc_idoso.imc_terceiraIdade(1.62, 61, 34)).toEqual(['Peso adequado','Quadro de normalidade' ])
+    expect(imc_idoso.imc_terceiraIdade(1.72, 50, 25)).toEqual(['Baixo peso', 'Desnutrição'])
+    expect(imc_idoso.imc_terceiraIdade(1.54, 80, 42)).toEqual(['Sobrepeso', 'Quadro de normalidade'])
+
+
+
+  })
+
+
 })

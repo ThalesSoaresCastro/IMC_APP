@@ -105,14 +105,48 @@ const imc = () => {
     }
 
 
-    const imc_idoso = ()=>{
+   /**
+    * Avaliação do peso IMC na terceira idade
+    * No caso dos idosos, além do IMC, é importante avaliar o perímetro ou circunferência
+    * da panturrilha, assim como se faz com a cintura quando medimos a circunferência da
+    * cintura. O perímetro da panturrilha é mais sensível para a avaliação da massa muscular,
+    * cuja redução implica a diminuição da força muscular. Nos idosos, o perímetro
+    * superior a 31 cm indica um quadro de normalidade, enquanto uma medida igual ou
+    * inferior a esse valor é indicativa de desnutrição.
+    *
+    *  link(https://www.saude.gov.br/component/content/article/804-imc/40511-avaliacao-do-peso-imc-na-terceira-idade)
+    *
+    */
+
+    const imc_terceiraIdade = (altura:number, peso:number, perimetro:number = 0)=>{
+
+        if(peso <=0 || altura <= 0){
+          return 'Valores deve ser maiores que zero'
+        }else{
+          let imc_calc = peso/(altura*altura)
+          let func_aux = (imc:number) =>{
+                if(imc <= 22) return 'Baixo peso'
+                else if (imc >= 27) return 'Sobrepeso'
+                else return 'Peso adequado'
+          }
+
+          let msg = 'No caso dos idosos, além do IMC, é importante avaliar o perímetro ou circunferência da panturrilha, assim como se faz com a cintura quando medimos a circunferência da cintura. O perímetro da panturrilha é mais sensível para a avaliação da massa muscular, cuja redução implica a diminuição da força muscular. Nos idosos, o perímetro superior a 31 cm indica um quadro de normalidade, enquanto uma medida igual ou inferior a esse valor é indicativa de desnutrição.'
+
+          if( perimetro > 0){
+            let p = ['Quadro de normalidade', 'Desnutrição']
+            return perimetro<=31? [ func_aux(imc_calc), p[1]]: [ func_aux(imc_calc), p[0]]
+          }else{
+            return [func_aux(imc_calc), msg]
+          }
+
+        }
 
     }
 
     return {
         imc_comum,
         imc_adolescente,
-        imc_idoso,
+        imc_terceiraIdade,
     };
 };
 
